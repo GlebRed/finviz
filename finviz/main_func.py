@@ -67,7 +67,7 @@ def get_insider(ticker):
 
 def get_news(ticker):
     """
-    Returns a list of sets containing news headline and url
+    Returns a list of sets containing news date, headline and url
 
     :param ticker: stock symbol
     :return: list
