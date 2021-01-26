@@ -20,7 +20,8 @@ setup(
         'aiohttp',
         'urllib3',
         'cssselect',
-        'user_agent'
+        'user_agent',
+        'bs4'
     ],
     classifiers=[
         'Development Status :: 5 - Production/Stable',

@@ -4,24 +4,21 @@ finviz-api
 
 .. image:: https://badge.fury.io/py/finviz.svg
     :target: https://badge.fury.io/py/finviz
-    
+
 .. image:: https://img.shields.io/badge/python-3.6-blue.svg
     :target: https://www.python.org/downloads/release/python-360/
-    
+
 .. image:: https://pepy.tech/badge/finviz
     :target: https://pepy.tech/project/finviz
-    
+
 .. image:: http://hits.dwyl.io/mariostoev/finviz.svg
     :target: http://hits.dwyl.io/mariostoev/finviz
-    
+
 
 Downloading & Installation
 -----
 
-    $ pip install -U git+https://github.com/mariostoev/finviz
-    OR
-    $ pip install finviz
-
+    $ pip install .
 
 What is Finviz?
 =====
@@ -40,7 +37,7 @@ Before using the Screener class, you have to manually go to the website's screen
 
 .. image:: https://i.imgur.com/p8BLt06.png
 
-``?v=111&s=ta_newhigh&f=cap_largeover,exch_nasd,fa_fpe_o10&o=-ticker&t=ZM`` are the extra parameters provided to the screener. Those parameters are a list of key/value pairs separated with the & symbol. Some keys have a clear intent - ``f=cap_largeover,exch_nasd,fa_fpe_o10`` are filters, ``o=-ticker`` is order and ``t=ZM`` are tickers - yet, some are ambiguous like ``v=111``, which stands for the type of table. 
+``?v=111&s=ta_newhigh&f=cap_largeover,exch_nasd,fa_fpe_o10&o=-ticker&t=ZM`` are the extra parameters provided to the screener. Those parameters are a list of key/value pairs separated with the & symbol. Some keys have a clear intent - ``f=cap_largeover,exch_nasd,fa_fpe_o10`` are filters, ``o=-ticker`` is order and ``t=ZM`` are tickers - yet, some are ambiguous like ``v=111``, which stands for the type of table.
 
 To make matters easier inside the code you won't refer to tables by their number tag, but instead you will use their full name (ex. ``table=Performance``).
 
@@ -51,13 +48,13 @@ To make matters easier inside the code you won't refer to tables by their number
     filters = ['exch_nasd', 'idx_sp500']  # Shows companies in NASDAQ which are in the S&P500
     stock_list = Screener(filters=filters, table='Performance', order='price')  # Get the performance table and sort it by price ascending
 
-    # Export the screener results to .csv 
+    # Export the screener results to .csv
     stock_list.to_csv("stock.csv")
 
-    # Create a SQLite database 
+    # Create a SQLite database
     stock_list.to_sqlite("stock.sqlite3")
 
-    for stock in stock_list[9:19]:  # Loop through 10th - 20th stocks 
+    for stock in stock_list[9:19]:  # Loop through 10th - 20th stocks
         print(stock['Ticker'], stock['Price']) # Print symbol and price
 
     # Add more filters
@@ -66,7 +63,7 @@ To make matters easier inside the code you won't refer to tables by their number
 
     # Print the table into the console
     print(stock_list)
-    
+
 .. image:: https://i.imgur.com/cb7UdxB.png
 
 Using Portfolio
@@ -78,16 +75,16 @@ Using Portfolio
     portfolio = Portfolio('<your-email-address>', '<your-password>', '<portfolio-name>')
     # Print the portfolio into the console
     print(portfolio)
-    
+
 *Note that, portfolio name is optional - it would assume your default portfolio (if you have one) if you exclude it.*
 The Portfolio class can also create new portfolio from an existing ``.csv`` file. The ``.csv`` file must be in the following format:
 
 
-.. list-table:: 
+.. list-table::
    :header-rows: 1
 
    * - Ticker
-     - Transaction  
+     - Transaction
      - Date (Opt.)
      - Shares
      - Price (Opt.)
@@ -98,15 +95,15 @@ The Portfolio class can also create new portfolio from an existing ``.csv`` file
      - 141.28
    * - NVDA
      - 2
-     - 
+     -
      - 250
      - 243.32
    * - WMT
      - 1
      - 01.19.2019
      - 45
-     - 
- 
+     -
+
 Note that, if any *optional* fields are left empty, the API will assign them today's data.
 
 .. code:: python
@@ -133,29 +130,29 @@ Downloading charts
 =====
 
 .. code:: python
-    
+
     # Monthly, Candles, Large, No Technical Analysis
     stock_list.get_charts(period='m', chart_type='c', size='l', ta='0')
-    
-    # period='d' > daily 
+
+    # period='d' > daily
     # period='w' > weekly
     # period='m' > monthly
-    
+
     # chart_type='c' > candle
     # chart_type='l' > lines
-    
+
     # size='m' > small
     # size='l' > large
-    
+
     # ta='1' > display technical analysis
     # ta='0' > ignore technical analysis
-    
+
 Documentation
 =====
 
 You can read the rest of the documentation inside the docstrings.
 
-Contributing 
+Contributing
 =====
 You can contribute to the project by reporting bugs, suggesting enhancements, or directly by extending and writing features (see the ongoing projects_).
 
